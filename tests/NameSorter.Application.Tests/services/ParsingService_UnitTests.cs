@@ -113,4 +113,81 @@ public class ParsingService_UnitTests
         parsedName.GivenNames.ShouldBe("Abc Def");
     }
 
+
+    [Fact]
+    public void Parse_ShouldReturnNamesCorrectly()
+    {
+        //Arrange
+        IEnumerable<string> nameStrings = new List<string>(){
+            "Abc Def",
+            "Ghi Jkl"
+        };
+
+        IParsingService parsingService = new ParsingService();
+
+        IEnumerable<Name> expectedNames = new List<Name>(){
+            new Name{ GivenNames = "Abc", LastName = "Def"},
+            new Name{ GivenNames = "Ghi", LastName = "Jkl"}
+        };
+
+        //Act
+        IEnumerable<Name> parsedNames = parsingService.Parse(nameStrings);
+
+        //Assert
+        parsedNames.ShouldNotBeNull();
+        parsedNames.Count().ShouldBe(expectedNames.Count());
+        parsedNames.ToList().ShouldBeEquivalentTo(expectedNames);
+    }
+
+    [Fact]
+    public void Parse_ShouldIgnoreInvalidNames()
+    {
+        //Arrange
+        IEnumerable<string> nameStrings = new List<string>(){
+            "Abc Def",
+            "A B C D E F",
+            "Ghi Jkl"
+        };
+
+        IParsingService parsingService = new ParsingService();
+
+        IEnumerable<Name> expectedNames = new List<Name>(){
+            new Name{ GivenNames = "Abc", LastName = "Def"},
+            new Name{ GivenNames = "Ghi", LastName = "Jkl"}
+        };
+
+        //Act
+        IEnumerable<Name> parsedNames = parsingService.Parse(nameStrings);
+
+        //Assert
+        parsedNames.ShouldNotBeNull();
+        parsedNames.Count().ShouldBe(expectedNames.Count());
+        parsedNames.ToList().ShouldBeEquivalentTo(expectedNames);
+    }
+
+    [Fact]
+    public void Parse_ShouldIgnoreEmptyStrings()
+    {
+        //Arrange
+        IEnumerable<string> nameStrings = new List<string>(){
+            "Abc Def",
+            "",
+            "Ghi Jkl"
+        };
+
+        IParsingService parsingService = new ParsingService();
+
+        IEnumerable<Name> expectedNames = new List<Name>(){
+            new Name{ GivenNames = "Abc", LastName = "Def"},
+            new Name{ GivenNames = "Ghi", LastName = "Jkl"}
+        };
+
+        //Act
+        IEnumerable<Name> parsedNames = parsingService.Parse(nameStrings);
+
+        //Assert
+        parsedNames.ShouldNotBeNull();
+        parsedNames.Count().ShouldBe(expectedNames.Count());
+        parsedNames.ToList().ShouldBeEquivalentTo(expectedNames);
+    }
 }
