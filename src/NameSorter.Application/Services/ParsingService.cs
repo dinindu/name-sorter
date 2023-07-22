@@ -1,0 +1,31 @@
+using System;
+namespace NameSorter.Application.Services;
+
+public class ParsingService : IParsingService
+{
+    public Name? ParseToName(string nameString)
+    {
+        if (string.IsNullOrEmpty(nameString))
+            return null;
+
+        string[] nameParts = nameString.Trim().Split(" ");
+
+        //Ignore multiple spaces and tabs
+        nameParts = nameParts.Where(np => !string.IsNullOrEmpty(np)).ToArray();
+
+        if (nameParts.Length > Constants.MAX_GIVEN_NAMES_ALLOWED + 1)
+            return null;
+
+        string lastName = nameParts.Last();
+        string[] givenNamesArray = nameParts.Take(nameParts.Length - 1).ToArray();
+        string givenName = String.Join(" ", givenNamesArray);
+
+        Name name = new Name
+        {
+            LastName = lastName,
+            GivenNames = givenName
+        };
+
+        return name;
+    }
+}
