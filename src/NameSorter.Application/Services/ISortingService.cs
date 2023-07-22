@@ -4,5 +4,5 @@ namespace NameSorter.Application.Services;
 
 public interface ISortingService
 {
-    IEnumerable<Name> Sort(IEnumerable<Name> persons);
+    IEnumerable<Name> Sort(IEnumerable<Name> names);
 }

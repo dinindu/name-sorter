@@ -2,9 +2,9 @@ namespace NameSorter.Application.Services;
 
 public class SortingService : ISortingService
 {
-    public IEnumerable<Name> Sort(IEnumerable<Name> persons)
+    public IEnumerable<Name> Sort(IEnumerable<Name> names)
     {
-        return persons
+        return names
             .OrderBy(p => p.LastName)
             .ThenBy(p => p.GivenNames)
             .AsEnumerable();
