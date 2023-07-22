@@ -1,3 +1,4 @@
+using NameSorter.Application.Services;
 namespace NameSorter.Application.Tests;
 
 public class SortingService_UnitTests
@@ -6,28 +7,29 @@ public class SortingService_UnitTests
     public void Sort_ShouldSortByLastName()
     {
         //Arrange
-        Person person1 = new Person()
+        Name name1 = new Name
         {
-            GivenName = "Abc",
+            GivenNames = "Abc",
             LastName = "Def"
         };
 
-        Person person2 = new Person()
+        Name name2 = new Name()
         {
-            GivenName = "Def",
+            GivenNames = "Def",
             LastName = "Abc"
         };
 
-        IEnumerable<Person> unsortedPersons = new List<Person>() { person1, person2 };
+        IEnumerable<Name> unsortedNames = new List<Name>() { name1, name2 };
 
-        IEnumerable<Person> expectedPersons = new List<Person>() { person2, person1 };
+        IEnumerable<Name> expectedNames = new List<Name>() { name2, name1 };
 
+        ISortingService sortingService = new SortingService();
 
         //Act
-        IEnumerable<Person> result = sortingService.Sort(persons);
+        IEnumerable<Name> result = sortingService.Sort(unsortedNames);
 
         //Assert
-        result.Count.ShouldBe(expectedPersons.Count);
+        result.ToList().ShouldBeEquivalentTo(expectedNames);
 
     }
 }
