@@ -7,7 +7,7 @@ namespace NameSorter.Application.Tests.Services;
 public class ParsingService_UnitTests
 {
     [Fact]
-    public void ParseToName_ShouldReturnNullForEmptyString()
+    public void ParseName_ShouldReturnNullForEmptyString()
     {
         //Arrange
         string nameString = "";
@@ -15,14 +15,14 @@ public class ParsingService_UnitTests
         IParsingService parsingService = new ParsingService();
 
         //Act
-        Name? parsedName = parsingService.ParseToName(nameString);
+        Name? parsedName = parsingService.ParseName(nameString);
 
         //Assert
         parsedName.ShouldBeNull();
     }
 
     [Fact]
-    public void ParseToName_ShouldReturnNullWhenExceedsMaximumNumberOfAllowedGivenNames()
+    public void ParseName_ShouldReturnNullWhenExceedsMaximumNumberOfAllowedGivenNames()
     {
         //Arrange
 
@@ -39,14 +39,14 @@ public class ParsingService_UnitTests
         IParsingService parsingService = new ParsingService();
 
         //Act
-        Name? parsedName = parsingService.ParseToName(sb.ToString());
+        Name? parsedName = parsingService.ParseName(sb.ToString());
 
         //Assert
         parsedName.ShouldBeNull();
     }
 
     [Fact]
-    public void ParseToName_ShouldReturnNullWhenOnlyOneName()
+    public void ParseName_ShouldReturnNullWhenOnlyOneName()
     {
         //Arrange
         string nameString = "Abc";
@@ -54,14 +54,14 @@ public class ParsingService_UnitTests
         IParsingService parsingService = new ParsingService();
 
         //Act
-        Name? parsedName = parsingService.ParseToName(nameString);
+        Name? parsedName = parsingService.ParseName(nameString);
 
         //Assert
         parsedName.ShouldBeNull();
     }
 
     [Fact]
-    public void ParseToName_ShouldParseNameCorrectly()
+    public void ParseName_ShouldParseNameCorrectly()
     {
         //Arrange
         string nameString = "Abc Def";
@@ -69,7 +69,7 @@ public class ParsingService_UnitTests
         IParsingService parsingService = new ParsingService();
 
         //Act
-        Name? parsedName = parsingService.ParseToName(nameString);
+        Name? parsedName = parsingService.ParseName(nameString);
 
         //Assert
         parsedName.ShouldNotBeNull();
@@ -78,7 +78,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void ParseToName_ShouldParseNameWhenMultipleGivenNames()
+    public void ParseName_ShouldParseNameWhenMultipleGivenNames()
     {
         //Arrange
         string nameString = "Abc Def Ghi";
@@ -86,7 +86,7 @@ public class ParsingService_UnitTests
         IParsingService parsingService = new ParsingService();
 
         //Act
-        Name? parsedName = parsingService.ParseToName(nameString);
+        Name? parsedName = parsingService.ParseName(nameString);
 
         //Assert
         parsedName.ShouldNotBeNull();
@@ -95,7 +95,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void ParseToName_ShouldIgnoreExtraSpaces()
+    public void ParseName_ShouldIgnoreExtraSpaces()
     {
         //Arrange
         string nameString = "Abc    Def  Ghi";
@@ -103,7 +103,7 @@ public class ParsingService_UnitTests
         IParsingService parsingService = new ParsingService();
 
         //Act
-        Name? parsedName = parsingService.ParseToName(nameString);
+        Name? parsedName = parsingService.ParseName(nameString);
 
         //Assert
         parsedName.ShouldNotBeNull();
@@ -112,7 +112,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void ParseToName_ShouldIgnoreLeadingAndTrailingSpaces()
+    public void ParseName_ShouldIgnoreLeadingAndTrailingSpaces()
     {
         //Arrange
         string nameString = "   Abc Def Ghi     ";
@@ -120,7 +120,7 @@ public class ParsingService_UnitTests
         IParsingService parsingService = new ParsingService();
 
         //Act
-        Name? parsedName = parsingService.ParseToName(nameString);
+        Name? parsedName = parsingService.ParseName(nameString);
 
         //Assert
         parsedName.ShouldNotBeNull();

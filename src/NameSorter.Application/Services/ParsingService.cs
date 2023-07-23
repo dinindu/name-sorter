@@ -9,7 +9,7 @@ public class ParsingService : IParsingService
 
         foreach (string name in names)
         {
-            Name? parsedName = ParseToName(name);
+            Name? parsedName = ParseName(name);
             if (parsedName != null)
                 result.Add(parsedName);
 
@@ -18,7 +18,7 @@ public class ParsingService : IParsingService
         return result;
     }
 
-    public Name? ParseToName(string nameString)
+    public Name? ParseName(string nameString)
     {
         if (string.IsNullOrEmpty(nameString))
             return null;
