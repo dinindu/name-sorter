@@ -46,6 +46,21 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
+    public void ParseToName_ShouldReturnNullWhenOnlyOneName()
+    {
+        //Arrange
+        string nameString = "Abc";
+
+        IParsingService parsingService = new ParsingService();
+
+        //Act
+        Name? parsedName = parsingService.ParseToName(nameString);
+
+        //Assert
+        parsedName.ShouldBeNull();
+    }
+
+    [Fact]
     public void ParseToName_ShouldParseNameCorrectly()
     {
         //Arrange

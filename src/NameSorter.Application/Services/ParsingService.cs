@@ -28,7 +28,7 @@ public class ParsingService : IParsingService
         //Ignore multiple spaces and tabs
         nameParts = nameParts.Where(np => !string.IsNullOrEmpty(np)).ToArray();
 
-        if (nameParts.Length > Constants.MAX_GIVEN_NAMES_ALLOWED + 1)
+        if (!IsValidName(nameParts))
             return null;
 
         string lastName = nameParts.Last();
@@ -40,5 +40,18 @@ public class ParsingService : IParsingService
             LastName = lastName,
             GivenNames = givenName
         };
+    }
+
+    private bool IsValidName(string[] nameParts)
+    {
+        //Should have at least one given name and last name and 
+        if (nameParts.Length < 2)
+            return false;
+
+        //Shoudld not have more than allowed number of given names
+        if (nameParts.Length > Constants.MAX_GIVEN_NAMES_ALLOWED + 1)
+            return false;
+
+        return true;
     }
 }
