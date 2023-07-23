@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\NameSorter.Domain\NameSorter.Domain.csproj" />
+    <ProjectReference Include="..\..\src\NameSorter.Application\NameSorter.Application.csproj" />
+    <ProjectReference Include="..\..\src\NameSorter.Infrastructure\NameSorter.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
