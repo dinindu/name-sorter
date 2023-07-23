@@ -3,7 +3,7 @@ namespace NameSorter.Application.Services;
 
 public class ParsingService : IParsingService
 {
-    public IEnumerable<Name> ParseToNames(IEnumerable<string> names)
+    public IEnumerable<Name> ParseToNamesList(IEnumerable<string> names)
     {
         List<Name> result = new List<Name>();
 
@@ -40,6 +40,11 @@ public class ParsingService : IParsingService
             LastName = lastName,
             GivenNames = givenName
         };
+    }
+
+    public IEnumerable<string> ParseToStringList(IEnumerable<Name> names)
+    {
+        return names.Select(n => n.DisplayName()).ToList();
     }
 
     private bool IsValidName(string[] nameParts)
