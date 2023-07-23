@@ -3,7 +3,7 @@ namespace NameSorter.Application.Services;
 
 public class ParsingService : IParsingService
 {
-    public IEnumerable<Name> Parse(IEnumerable<string> names)
+    public IEnumerable<Name> ParseToNames(IEnumerable<string> names)
     {
         List<Name> result = new List<Name>();
 

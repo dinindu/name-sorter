@@ -130,7 +130,7 @@ public class ParsingService_UnitTests
 
 
     [Fact]
-    public void Parse_ShouldReturnNamesCorrectly()
+    public void ParseToNames_ShouldReturnNamesCorrectly()
     {
         //Arrange
         IEnumerable<string> nameStrings = new List<string>(){
@@ -146,7 +146,7 @@ public class ParsingService_UnitTests
         };
 
         //Act
-        IEnumerable<Name> parsedNames = parsingService.Parse(nameStrings);
+        IEnumerable<Name> parsedNames = parsingService.ParseToNames(nameStrings);
 
         //Assert
         parsedNames.ShouldNotBeNull();
@@ -155,7 +155,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void Parse_ShouldIgnoreInvalidNames()
+    public void ParseToNames_ShouldIgnoreInvalidNames()
     {
         //Arrange
         IEnumerable<string> nameStrings = new List<string>(){
@@ -172,7 +172,7 @@ public class ParsingService_UnitTests
         };
 
         //Act
-        IEnumerable<Name> parsedNames = parsingService.Parse(nameStrings);
+        IEnumerable<Name> parsedNames = parsingService.ParseToNames(nameStrings);
 
         //Assert
         parsedNames.ShouldNotBeNull();
@@ -181,7 +181,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void Parse_ShouldIgnoreEmptyStrings()
+    public void ParseToNames_ShouldIgnoreEmptyStrings()
     {
         //Arrange
         IEnumerable<string> nameStrings = new List<string>(){
@@ -198,7 +198,7 @@ public class ParsingService_UnitTests
         };
 
         //Act
-        IEnumerable<Name> parsedNames = parsingService.Parse(nameStrings);
+        IEnumerable<Name> parsedNames = parsingService.ParseToNames(nameStrings);
 
         //Assert
         parsedNames.ShouldNotBeNull();
