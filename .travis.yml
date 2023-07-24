@@ -1,9 +1,9 @@
 language: csharp
 mono: none
-sudo: required
-dist: xenial
-dotnet: 7.0.0
+#sudo: required
+#dist: xenial
+dotnet: 7.0.107
 script:
   - dotnet restore
   - dotnet build
-  - dotnet test NameSorter.sln
+  - dotnet test
