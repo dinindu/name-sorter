@@ -13,12 +13,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .WriteTo.File("./logs/log.txt",
-                rollingInterval: RollingInterval.Day,
-                rollOnFileSizeLimit: true)
-            .CreateLogger();
+        ConfigureLogger();
 
         Parser.Default.ParseArguments<Options>(args)
             .WithParsed(options =>
@@ -31,19 +26,7 @@ class Program
                     string startLog = $"Sorting names from '{inputFile}' to '{outputFile}' ...";
                     Log.Information(startLog);
 
-                    IFileReader fileReader = new FileReader();
-                    IEnumerable<string> unsortedNames = fileReader.ReadLines(inputFile);
-
-                    IParsingService parsingService = new ParsingService();
-                    IEnumerable<Name> parsedNames = parsingService.ParseToNamesList(unsortedNames);
-
-                    ISortingService sortingService = new SortingService();
-                    IEnumerable<Name> sortedNames = sortingService.Sort(parsedNames);
-
-                    IEnumerable<string> sortedNameStrings = parsingService.ParseToStringList(sortedNames);
-
-                    IFileWriter fileWriter = new FileWriter();
-                    fileWriter.WriteLines(outputFile, sortedNameStrings);
+                    IEnumerable<string> sortedNameStrings = InitiateSorting(inputFile, outputFile);
 
                     DisplaySortedNames(sortedNameStrings);
 
@@ -63,11 +46,40 @@ class Program
             });
     }
 
+    private static IEnumerable<string> InitiateSorting(string inputFile, string outputFile)
+    {
+        IFileReader fileReader = new FileReader();
+        IEnumerable<string> unsortedNameStrings = fileReader.ReadLines(inputFile);
+
+        IParsingService parsingService = new ParsingService();
+        IEnumerable<Name> parsedNames = parsingService.ParseToNamesList(unsortedNameStrings);
+
+        ISortingService sortingService = new SortingService();
+        IEnumerable<Name> sortedNames = sortingService.Sort(parsedNames);
+
+        IEnumerable<string> sortedNameStrings = parsingService.ParseToStringList(sortedNames);
+
+        IFileWriter fileWriter = new FileWriter();
+        fileWriter.WriteLines(outputFile, sortedNameStrings);
+
+        return sortedNameStrings;
+    }
+
     private static void DisplaySortedNames(IEnumerable<string> sortedNameStrings)
     {
         foreach (string name in sortedNameStrings)
         {
             Console.WriteLine(name);
         }
+    }
+
+    private static void ConfigureLogger()
+    {
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.File("./logs/log.txt",
+                rollingInterval: RollingInterval.Day,
+                rollOnFileSizeLimit: true)
+            .CreateLogger();
     }
 }
