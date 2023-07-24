@@ -3,6 +3,9 @@ namespace NameSorter.Application.Services;
 
 public class ParsingService : IParsingService
 {
+    /// <summary>
+    /// ParseToNamesList converts a list of names in string format into a list of Name
+    /// </summary>
     public IEnumerable<Name> ParseToNamesList(IEnumerable<string> names)
     {
         List<Name> result = new List<Name>();
