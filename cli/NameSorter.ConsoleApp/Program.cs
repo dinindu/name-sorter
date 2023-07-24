@@ -1,6 +1,10 @@
-﻿using NameSorter.Infrastructure;
+﻿using System;
+using System.ComponentModel;
+using NameSorter.Infrastructure;
 using NameSorter.Domain;
 using NameSorter.Application.Services;
+using CommandLine;
+using CommandLine.Text;
 
 namespace NameSorter.ConsoleApp;
 
@@ -8,26 +12,35 @@ class Program
 {
     static void Main(string[] args)
     {
-        string inputFile = "./unsorted-names-list.txt";
+        Parser.Default.ParseArguments<Options>(args)
+            .WithParsed(options =>
+            {
+                try
+                {
+                    string inputFile = options.InputFile;
+                    string outputFile = options.OutputFile;
 
-        IFileReader fileReader = new FileReader();
-        IEnumerable<string> unsortedNames = fileReader.ReadLines(inputFile);
+                    IFileReader fileReader = new FileReader();
+                    IEnumerable<string> unsortedNames = fileReader.ReadLines(inputFile);
 
-        IParsingService parsingService = new ParsingService();
-        IEnumerable<Name> parsedNames = parsingService.ParseToNamesList(unsortedNames);
+                    IParsingService parsingService = new ParsingService();
+                    IEnumerable<Name> parsedNames = parsingService.ParseToNamesList(unsortedNames);
 
-        ISortingService sortingService = new SortingService();
-        IEnumerable<Name> sortedNames = sortingService.Sort(parsedNames);
+                    ISortingService sortingService = new SortingService();
+                    IEnumerable<Name> sortedNames = sortingService.Sort(parsedNames);
 
-        IEnumerable<string> sortedNameStrings = parsingService.ParseToStringList(sortedNames);
+                    IEnumerable<string> sortedNameStrings = parsingService.ParseToStringList(sortedNames);
 
-        string outputFile = "./sorted-names-list.txt";
+                    IFileWriter fileWriter = new FileWriter();
+                    fileWriter.WriteLines(outputFile, sortedNameStrings);
 
-        IFileWriter fileWriter = new FileWriter();
-        fileWriter.WriteLines(outputFile, sortedNameStrings);
-
-        DisplaySortedNames(sortedNameStrings);
-
+                    DisplaySortedNames(sortedNameStrings);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            });
     }
 
     private static void DisplaySortedNames(IEnumerable<string> sortedNameStrings)
