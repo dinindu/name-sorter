@@ -12,7 +12,6 @@ public class ParsingService : IParsingService
             Name? parsedName = ParseName(name);
             if (parsedName != null)
                 result.Add(parsedName);
-
         }
 
         return result;

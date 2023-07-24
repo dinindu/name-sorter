@@ -13,7 +13,6 @@ public class ParsingService_UnitTests
     {
         //Arrange
         string nameString = "";
-
         IParsingService parsingService = new ParsingService();
 
         //Act
@@ -27,7 +26,6 @@ public class ParsingService_UnitTests
     public void ParseName_Should_ReturnNull_When_GivenNamesExceedsMaximumAllowedNumber()
     {
         //Arrange
-
         StringBuilder sb = new StringBuilder();
         sb.Append("GN1");
 
