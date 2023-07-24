@@ -6,8 +6,10 @@ namespace NameSorter.Application.Tests.Services;
 
 public class ParsingService_UnitTests
 {
+    #region  ParseName Unit Tests
+
     [Fact]
-    public void ParseName_ShouldReturnNullForEmptyString()
+    public void ParseName_Should_ReturnNull_When_NameIsEmpty()
     {
         //Arrange
         string nameString = "";
@@ -22,7 +24,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void ParseName_ShouldReturnNullWhenExceedsMaximumNumberOfAllowedGivenNames()
+    public void ParseName_Should_ReturnNull_When_GivenNamesExceedsMaximumAllowedNumber()
     {
         //Arrange
 
@@ -46,7 +48,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void ParseName_ShouldReturnNullWhenOnlyOneName()
+    public void ParseName_Should_ReturnNull_When_OnlyOneName()
     {
         //Arrange
         string nameString = "Abc";
@@ -61,7 +63,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void ParseName_ShouldParseNameCorrectly()
+    public void ParseName_Should_ParseNameCorrectly_When_NameIsValid()
     {
         //Arrange
         string nameString = "Abc Def";
@@ -78,7 +80,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void ParseName_ShouldParseNameWhenMultipleGivenNames()
+    public void ParseName_Should_ParseNameCorrectly_When_MultipleGivenNames()
     {
         //Arrange
         string nameString = "Abc Def Ghi";
@@ -95,7 +97,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void ParseName_ShouldIgnoreExtraSpaces()
+    public void ParseName_Should_Ignore_When_ExtraSpaces()
     {
         //Arrange
         string nameString = "Abc    Def  Ghi";
@@ -112,7 +114,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void ParseName_ShouldIgnoreLeadingAndTrailingSpaces()
+    public void ParseName_Should_Ignore_When_LeadingAndTrailingSpaces()
     {
         //Arrange
         string nameString = "   Abc Def Ghi     ";
@@ -128,9 +130,12 @@ public class ParsingService_UnitTests
         parsedName.GivenNames.ShouldBe("Abc Def");
     }
 
+    #endregion
+
+    #region  ParseToNamesList Unit Tests
 
     [Fact]
-    public void ParseToNamesList_ShouldReturnNamesCorrectly()
+    public void ParseToNamesList_Should_ReturnNames_When_Valid()
     {
         //Arrange
         IEnumerable<string> nameStrings = new List<string>(){
@@ -155,7 +160,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void ParseToNamesList_ShouldIgnoreInvalidNames()
+    public void ParseToNamesList_Should_Ignore_When_Invalid()
     {
         //Arrange
         IEnumerable<string> nameStrings = new List<string>(){
@@ -181,7 +186,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void ParseToNamesList_ShouldIgnoreEmptyStrings()
+    public void ParseToNamesList_Should_Ignore_When_EmptyString()
     {
         //Arrange
         IEnumerable<string> nameStrings = new List<string>(){
@@ -206,9 +211,12 @@ public class ParsingService_UnitTests
         parsedNames.ToList().ShouldBeEquivalentTo(expectedNames);
     }
 
+    #endregion
+
+    #region ParseToStringList Unit Tests
 
     [Fact]
-    public void ParseToStringList_ShouldParseNamesCorrectly()
+    public void ParseToStringList_Should_ParseNames_When_Valid()
     {
         //Arrange
         IEnumerable<Name> names = new List<Name>(){
@@ -231,4 +239,6 @@ public class ParsingService_UnitTests
         parsedNameStrings.Count().ShouldBe(expectedNameStrings.Count());
         parsedNameStrings.ToList().ShouldBeEquivalentTo(expectedNameStrings);
     }
+
+    #endregion
 }

@@ -3,8 +3,10 @@ namespace NameSorter.Application.Tests;
 
 public class SortingService_UnitTests
 {
+    #region Sort Unit Tests
+
     [Fact]
-    public void Sort_ShouldSortByLastName()
+    public void Sort_Should_SortByLastName()
     {
         //Arrange
         Name name1 = new Name
@@ -33,7 +35,7 @@ public class SortingService_UnitTests
     }
 
     [Fact]
-    public void Sort_ShouldSortByLastNameWhenFirstCharacterIsTheSame()
+    public void Sort_Should_SortByLastName_When_FirstCharacterIsTheSame()
     {
         //Arrange
         Name name1 = new Name
@@ -62,7 +64,7 @@ public class SortingService_UnitTests
     }
 
     [Fact]
-    public void Sort_ShouldSortByLastNameWithSameGivenNames()
+    public void Sort_Should_SortByLastName_When_SameGivenNames()
     {
         //Arrange
         Name name1 = new Name
@@ -91,7 +93,7 @@ public class SortingService_UnitTests
     }
 
     [Fact]
-    public void Sort_ShouldSortByLastNameWithUpperCase()
+    public void Sort_Should_SortByLastName_When_UpperCase()
     {
         //Arrange
         Name name1 = new Name
@@ -120,7 +122,7 @@ public class SortingService_UnitTests
     }
 
     [Fact]
-    public void Sort_ShouldSortByLastNameWithLowerCase()
+    public void Sort_Should_SortByLastName_When_LowerCase()
     {
         //Arrange
         Name name1 = new Name
@@ -149,7 +151,7 @@ public class SortingService_UnitTests
     }
 
     [Fact]
-    public void Sort_ShouldSortByGivenNamesWithSameLastName()
+    public void Sort_Should_SortByGivenNames_When_SameLastName()
     {
         //Arrange
         Name name1 = new Name
@@ -178,7 +180,7 @@ public class SortingService_UnitTests
     }
 
     [Fact]
-    public void Sort_ShouldSortByLastNameThenByGivenNames()
+    public void Sort_Should_SortByLastName_Then_ByGivenNames()
     {
         //Arrange
         Name name1 = new Name
@@ -213,7 +215,7 @@ public class SortingService_UnitTests
     }
 
     [Fact]
-    public void Sort_ShouldSortByGivenNamesInOrder()
+    public void Sort_Should_SortByGivenNames_InOrder()
     {
         //Arrange
         Name name1 = new Name
@@ -242,7 +244,7 @@ public class SortingService_UnitTests
     }
 
     [Fact]
-    public void Sort_ShouldSortByGivenNamesInOrderWhenMoreThanTwoGivenNames()
+    public void Sort_Should_SortByGivenNamesInOrder_When_MoreThanTwoGivenNames()
     {
         //Arrange
         Name name1 = new Name
@@ -271,7 +273,7 @@ public class SortingService_UnitTests
     }
 
     [Fact]
-    public void Sort_ShouldSortByGivenNamesInOrderWithDifferentGivenNameCounts()
+    public void Sort_Should_SortByGivenNamesInOrder_When_GivenNameCountsDiffer()
     {
         //Arrange
         Name name1 = new Name
@@ -298,4 +300,6 @@ public class SortingService_UnitTests
         //Assert
         result.ToList().ShouldBeEquivalentTo(expectedNames);
     }
+
+    #endregion
 }

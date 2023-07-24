@@ -5,7 +5,7 @@ namespace NameSorter.Infrastructure.Tests;
 public class FileReader_UnitTests
 {
     [Fact]
-    public void ReadLines_ShouldThrowAnErrorWhenFileIsNotFound()
+    public void ReadLines_Should_ThrowAnError_When_FileIsNotFound()
     {
         // Arrange
         IFileReader fileReader = new FileReader();
