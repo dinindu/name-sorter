@@ -7,7 +7,6 @@ namespace NameSorter.Infrastructure
         public bool WriteLines(string filename, IEnumerable<string> lines)
         {
             File.WriteAllLines(filename, lines);
-
             return true;
         }
     }
