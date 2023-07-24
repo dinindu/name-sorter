@@ -5,6 +5,7 @@ using NameSorter.Domain;
 using NameSorter.Application.Services;
 using CommandLine;
 using CommandLine.Text;
+using Serilog;
 
 namespace NameSorter.ConsoleApp;
 
@@ -12,6 +13,13 @@ class Program
 {
     static void Main(string[] args)
     {
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.File("./logs/log.txt",
+                rollingInterval: RollingInterval.Day,
+                rollOnFileSizeLimit: true)
+            .CreateLogger();
+
         Parser.Default.ParseArguments<Options>(args)
             .WithParsed(options =>
             {
@@ -19,6 +27,9 @@ class Program
                 {
                     string inputFile = options.InputFile;
                     string outputFile = options.OutputFile;
+
+                    string startLog = $"Sorting names from '{inputFile}' to '{outputFile}' ...";
+                    Log.Information(startLog);
 
                     IFileReader fileReader = new FileReader();
                     IEnumerable<string> unsortedNames = fileReader.ReadLines(inputFile);
@@ -35,10 +46,19 @@ class Program
                     fileWriter.WriteLines(outputFile, sortedNameStrings);
 
                     DisplaySortedNames(sortedNameStrings);
+
+                    string endLog = $"Sorted names from '{inputFile}' int to '{outputFile}'";
+                    Log.Information(endLog);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    string errorMessage = $"""
+                                           Failed to sort names!
+                                           Error(s):
+                                           {ex.Message}
+                                           """;
+                    Console.WriteLine(errorMessage);
+                    Log.Error(errorMessage);
                 }
             });
     }
