@@ -17,6 +17,7 @@ class Program
     private readonly ISortingService _sortingService;
     private readonly IFileWriter _fileWriter;
 
+    // Constructor with injected services
     public Program(IFileReader fileReader, IParsingService parsingService, ISortingService sortingService, IFileWriter fileWriter)
     {
         _fileReader = fileReader;
@@ -28,11 +29,14 @@ class Program
     {
         ConfigureLogger();
 
+        // Configure the dependency injection container and register services
         var serviceProvider = ConfigureServiceProvider();
 
+        // Parse the command line arguments
         Parser.Default.ParseArguments<Options>(args)
             .WithParsed(options =>
             {
+                // Create an instance of the program with injected services
                 var program = new Program(
                         serviceProvider.GetService<IFileReader>(),
                         serviceProvider.GetService<IParsingService>(),
@@ -55,6 +59,7 @@ class Program
 
     private static ServiceProvider ConfigureServiceProvider()
     {
+        // Configure the dependency injection container and register services
         return new ServiceCollection()
             .AddSingleton<IFileReader, FileReader>()
             .AddSingleton<IParsingService, ParsingService>()

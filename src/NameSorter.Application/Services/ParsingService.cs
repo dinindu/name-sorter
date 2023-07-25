@@ -4,7 +4,7 @@ namespace NameSorter.Application.Services;
 public class ParsingService : IParsingService
 {
     /// <summary>
-    /// ParseToNamesList converts a list of names in string format into a list of Name
+    /// ParseToNamesList converts a list of names in string format into a list of Name.
     /// </summary>
     public IEnumerable<Name> ParseToNamesList(IEnumerable<string> names)
     {
@@ -21,8 +21,8 @@ public class ParsingService : IParsingService
     }
 
     /// <summary>
-    /// ParseName converts a string into a Name
-    /// Returns null if the string is empty or invalid
+    /// ParseName converts a string into a Name.
+    /// Returns null if the string is empty or invalid.
     /// </summary>
     public Name? ParseName(string nameString)
     {
@@ -31,7 +31,7 @@ public class ParsingService : IParsingService
 
         string[] nameParts = nameString.Trim().Split(" ");
 
-        //Ignore multiple spaces and tabs
+        //Ignore multiple spaces and tabs by removing empty name parts
         nameParts = nameParts.Where(np => !string.IsNullOrEmpty(np)).ToArray();
 
         if (!IsValidName(nameParts))
@@ -52,7 +52,7 @@ public class ParsingService : IParsingService
     }
 
     /// <summary>
-    /// ParseToNamesList converts a list of Name into a list of names in string format
+    /// ParseToNamesList converts a list of Name into a list of names in string format.
     /// </summary>
     public IEnumerable<string> ParseToStringList(IEnumerable<Name> names)
     {
@@ -60,8 +60,8 @@ public class ParsingService : IParsingService
     }
 
     /// <summary>
-    /// IsValidName validates a name considering the name parts
-    /// Returns true if the name is valid and false otherwise
+    /// IsValidName validates a name considering the name parts.
+    /// Returns true if the name is valid and false otherwise.
     /// </summary>
     private bool IsValidName(string[] nameParts)
     {

@@ -95,7 +95,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void ParseName_Should_Ignore_When_ExtraSpaces()
+    public void ParseName_Should_Ignore_ExtraSpaces()
     {
         //Arrange
         string nameString = "Abc    Def  Ghi";
@@ -112,7 +112,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void ParseName_Should_Ignore_When_LeadingAndTrailingSpaces()
+    public void ParseName_Should_Ignore_LeadingAndTrailingSpaces()
     {
         //Arrange
         string nameString = "   Abc Def Ghi     ";
@@ -184,7 +184,7 @@ public class ParsingService_UnitTests
     }
 
     [Fact]
-    public void ParseToNamesList_Should_Ignore_When_EmptyString()
+    public void ParseToNamesList_Should_Ignore_EmptyString()
     {
         //Arrange
         IEnumerable<string> nameStrings = new List<string>(){
