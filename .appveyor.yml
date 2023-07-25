@@ -1,0 +1,9 @@
+version: 1.0.{build}
+image: Visual Studio 2022
+build_script:
+  - sh: >-
+      dotnet restore
+
+      dotnet build
+test_script:
+  - sh: dotnet test -v=normal
