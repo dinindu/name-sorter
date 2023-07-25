@@ -7,6 +7,6 @@ namespace NameSorter.Infrastructure
 {
     public interface IFileWriter
     {
-        bool WriteLines(string filename, IEnumerable<string> lines);
+        void WriteLines(string filename, IEnumerable<string> lines);
     }
 }
