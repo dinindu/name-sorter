@@ -20,6 +20,10 @@ public class ParsingService : IParsingService
         return result;
     }
 
+    /// <summary>
+    /// ParseName converts a string into a Name
+    /// Returns null if the string is empty or invalid
+    /// </summary>
     public Name? ParseName(string nameString)
     {
         if (string.IsNullOrEmpty(nameString))
@@ -33,7 +37,10 @@ public class ParsingService : IParsingService
         if (!IsValidName(nameParts))
             return null;
 
+        //Last name part is the last name
         string lastName = nameParts.Last();
+
+        //Get the given names from the name parts
         string[] givenNamesArray = nameParts.Take(nameParts.Length - 1).ToArray();
         string givenName = String.Join(" ", givenNamesArray);
 
@@ -44,14 +51,21 @@ public class ParsingService : IParsingService
         };
     }
 
+    /// <summary>
+    /// ParseToNamesList converts a list of Name into a list of names in string format
+    /// </summary>
     public IEnumerable<string> ParseToStringList(IEnumerable<Name> names)
     {
         return names.Select(n => n.DisplayName()).ToList();
     }
 
+    /// <summary>
+    /// IsValidName validates a name considering the name parts
+    /// Returns true if the name is valid and false otherwise
+    /// </summary>
     private bool IsValidName(string[] nameParts)
     {
-        //Should have at least one given name and last name and 
+        //Should have at least one given name and last name 
         if (nameParts.Length < 2)
             return false;
 
