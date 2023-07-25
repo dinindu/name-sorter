@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/jk0ueeulkcf90k2i/branch/master?svg=true)](https://ci.appveyor.com/project/dinindu/name-sorter/branch/master)
+
 # Name Sorter
 
 A simple application to sort a list of names.
