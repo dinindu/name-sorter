@@ -61,7 +61,7 @@ In the root level execute the following command to run the unit tests in verbose
 dotnet test -v=normal
 ```
 
-## Logs
+### Logs
 
 - Log files will be stored under ~/name-sorter/cli/logs directory
 
